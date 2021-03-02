@@ -49,6 +49,7 @@ public class BrandModelsPage extends AbstractPage {
     				return model.openModelPage();
     			}
     		}
+    		// Select next page
     		findExtendedWebElement(xpathnext).click();
     	}
         throw new RuntimeException("Unable to open model: " + modelName);
