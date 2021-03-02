@@ -49,9 +49,6 @@ public class WebSampleTest extends AbstractTest {
     @MethodOwner(owner = "qpsdemo")
     @TestPriority(Priority.P3)
     public void testModelSpecs() {
-    	
-    	final ByXPath anyLocator =  new ByXPath("//a[@class='pages-next']");
-    	
         // Open GSM Arena home page and verify page is opened
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
@@ -63,13 +60,12 @@ public class WebSampleTest extends AbstractTest {
         // Select phone brand
         homePage = new HomePage(getDriver());
         BrandModelsPage productsPage = homePage.selectBrand("Samsung");
+        
         // Select phone model
-        
-        
-        //productsPage.findExtendedWebElement(anyLocator).click();
-        
-        ModelInfoPage productInfoPage = productsPage.selectModelByPages("Galaxy S10+", anyLocator);
         //ModelInfoPage productInfoPage = productsPage.selectModel("Galaxy S10+");
+        final ByXPath anyLocator =  new ByXPath("//a[@class='pages-next']");
+        ModelInfoPage productInfoPage = productsPage.selectModelByPages("Galaxy S10+", anyLocator);
+        
         // Verify phone specifications
         Assert.assertEquals(productInfoPage.readDisplay(), "6.4\"", "Invalid display info!");
         Assert.assertEquals(productInfoPage.readCamera(), "16MP", "Invalid camera info!");
