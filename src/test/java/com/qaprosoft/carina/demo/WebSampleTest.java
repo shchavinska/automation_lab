@@ -19,6 +19,8 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByXPath;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -36,7 +38,7 @@ import com.qaprosoft.carina.demo.gui.pages.CompareModelsPage;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import com.qaprosoft.carina.demo.gui.pages.ModelInfoPage;
 import com.qaprosoft.carina.demo.gui.pages.NewsPage;
-
+ 
 /**
  * This sample shows how create Web test.
  * 
@@ -47,6 +49,9 @@ public class WebSampleTest extends AbstractTest {
     @MethodOwner(owner = "qpsdemo")
     @TestPriority(Priority.P3)
     public void testModelSpecs() {
+    	
+    	final ByXPath anyLocator =  new ByXPath("//a[@class='pages-next']");
+    	
         // Open GSM Arena home page and verify page is opened
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
@@ -59,7 +64,12 @@ public class WebSampleTest extends AbstractTest {
         homePage = new HomePage(getDriver());
         BrandModelsPage productsPage = homePage.selectBrand("Samsung");
         // Select phone model
-        ModelInfoPage productInfoPage = productsPage.selectModel("Galaxy S10+");
+        
+        
+        //productsPage.findExtendedWebElement(anyLocator).click();
+        
+        ModelInfoPage productInfoPage = productsPage.selectModelByPages("Galaxy S10+", anyLocator);
+        //ModelInfoPage productInfoPage = productsPage.selectModel("Galaxy S10+");
         // Verify phone specifications
         Assert.assertEquals(productInfoPage.readDisplay(), "6.4\"", "Invalid display info!");
         Assert.assertEquals(productInfoPage.readCamera(), "16MP", "Invalid camera info!");

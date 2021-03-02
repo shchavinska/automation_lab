@@ -17,6 +17,7 @@ package com.qaprosoft.carina.demo.gui.pages;
 
 import java.util.List;
 
+import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -37,6 +38,19 @@ public class BrandModelsPage extends AbstractPage {
                 return model.openModelPage();
             }
         }
+        throw new RuntimeException("Unable to open model: " + modelName);
+    }
+    
+    //mytry
+    public ModelInfoPage selectModelByPages(String modelName, ByXPath xpathnext) {
+    	for(int page=1; page<10; page++) {
+    		for (ModelItem model : models) {
+    			if (model.readModel().equalsIgnoreCase(modelName)) {
+    				return model.openModelPage();
+    			}
+    		}
+    		findExtendedWebElement(xpathnext).click();
+    	}
         throw new RuntimeException("Unable to open model: " + modelName);
     }
 }
