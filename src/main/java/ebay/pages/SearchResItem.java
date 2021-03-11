@@ -1,4 +1,4 @@
-package eBayPages;
+package ebay.pages;
 
 import org.openqa.selenium.SearchContext;
 

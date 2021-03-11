@@ -1,4 +1,4 @@
-package eBayTest;
+package ebaytests;
 
 import java.util.List;
 
@@ -8,11 +8,11 @@ import org.testng.annotations.Test;
 import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 
-import eBayPages.HomePageEBay;
-import eBayPages.CartPage;
-import eBayPages.ItemPage;
-import eBayPages.SearchRes;
-import eBayPages.SearchResItem;
+import ebay.pages.CartPage;
+import ebay.pages.HomePageEBay;
+import ebay.pages.ItemPage;
+import ebay.pages.SearchRes;
+import ebay.pages.SearchResItem;
 
 public class EBayTest extends AbstractTest {
 	
