@@ -23,13 +23,13 @@ public class HomePageEBay extends AbstractPage {
     private ExtendedWebElement searchButton;
 
     @FindBy(xpath="//div[@class='main-content']/div[contains(@class,'hl-standard-carousel')][last()]//li[contains(@class,'carousel')]")
-    public List<ExtendedWebElement> listOfDailyDealsItems;
+    private List<ExtendedWebElement> listOfDailyDealsItems;
     
     
-    public String dailyDealsField = "//div[@class='main-content']/div[contains(@class,'hl-standard-carousel')][last()]//li[contains(@class,'carousel')]";
+    private String dailyDealsField = "//div[@class='main-content']/div[contains(@class,'hl-standard-carousel')][last()]//li[contains(@class,'carousel')]";
  
     @FindBy(xpath="//a[contains(@title,'Your shopping cart')]")
-    public ExtendedWebElement cartBtn;
+    private ExtendedWebElement cartBtn;
     
     
     public HomePageEBay(WebDriver driver) {
@@ -45,7 +45,8 @@ public class HomePageEBay extends AbstractPage {
     
     
     public void scrollToDailyDealsSection() {
-    	WebElement element = driver.findElement(By.xpath(dailyDealsField)); 
+    	//WebElement element = driver.findElement(By.xpath(dailyDealsField));
+    	WebElement element = listOfDailyDealsItems.get(0).getElement();
     	Actions actions = new Actions(driver); 
     	actions.moveToElement(element);
     	LOGGER.info("Scroll to element.");

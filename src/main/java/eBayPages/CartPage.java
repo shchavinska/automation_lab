@@ -11,14 +11,14 @@ public class CartPage extends AbstractPage{
     private static final Logger LOGGER = Logger.getLogger(CartPage.class);
 	
 	@FindBy(xpath = "//h1[@class='main-title']")
-	public ExtendedWebElement quantitiCartElement;
+	private ExtendedWebElement quantitiCartElement;
 	
 
 	@FindBy(xpath = "//button[@data-test-id='cart-remove-item']")
-	public ExtendedWebElement removeBtn;
+	private ExtendedWebElement removeBtn;
 	
 	@FindBy(xpath = "//div[@class='font-title-3']/span/span/span")
-	public ExtendedWebElement cartStatus;
+	private ExtendedWebElement cartStatus;
 	
     public CartPage(WebDriver driver) {
         super(driver);
@@ -33,6 +33,10 @@ public class CartPage extends AbstractPage{
     
     public String getStatus() {
         return cartStatus.getText();
+    }
+    
+    public void clickRemoveBtn() {
+    	removeBtn.click();
     }
 
 }

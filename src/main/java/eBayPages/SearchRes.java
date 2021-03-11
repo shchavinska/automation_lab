@@ -16,12 +16,12 @@ public class SearchRes extends AbstractPage {
     private static final Logger LOGGER = Logger.getLogger(SearchRes.class);
 
     @FindBy(xpath = "//ul[contains(@class,'srp-results')]/li[contains(@class,'s-item')]")
-    public List<SearchResItem> searchRes;
+    private List<SearchResItem> searchRes;
 
-    public String checkbox120 = "//input[@class='checkbox__control' and @aria-label='Under $120.00']";
+    private String checkbox120 = "//input[@class='checkbox__control' and @aria-label='Under $120.00']";
     
     @FindBy(xpath = "//h2[@class='srp-format-tabs-h2' and contains(text(),'Auction')]")
-    public ExtendedWebElement auctionButton;
+    private ExtendedWebElement auctionButton;
     
     public SearchRes(WebDriver driver) {
         super(driver);
@@ -43,4 +43,7 @@ public class SearchRes extends AbstractPage {
     	return new SearchRes(driver);
     }
     
+    public List<SearchResItem> getSearchRes(){
+    	return searchRes;
+    }
 }

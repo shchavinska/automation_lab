@@ -11,10 +11,14 @@ public class ItemPage extends AbstractPage {
     //private static final Logger LOGGER = Logger.getLogger(ItemPage.class);
 	
 	@FindBy(xpath = "//a[@id='bidBtn_btn']")
-    public ExtendedWebElement bidBtn;
+    private ExtendedWebElement bidBtn;
 	
     public ItemPage(WebDriver driver) {
         super(driver);
     } 
+    
+    public ExtendedWebElement getBidBtn() {
+    	return bidBtn;
+    }
 
 }

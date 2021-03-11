@@ -17,16 +17,16 @@ public class SearchResItem extends AbstractUIObject {
     private ExtendedWebElement tittleElement;
     
     @FindBy(xpath = ".//span[@class='s-item__price']")
-    public ExtendedWebElement priceElement;
+    private ExtendedWebElement priceElement;
 
     @FindBy(xpath = "//a[@id='isCartBtn_btn']")
-    public ExtendedWebElement addToCartBtn;
+    private ExtendedWebElement addToCartBtn;
     
     @FindBy(xpath = "//select[@id='msku-sel-1']")
-    public ExtendedWebElement optionSelect;
+    private ExtendedWebElement optionSelect;
     
     @FindBy(xpath = "//select[@id='msku-sel-1']/option[@id='msku-opt-0']")
-    public ExtendedWebElement selectFirstOption;
+    private ExtendedWebElement selectFirstOption;
     
  
 

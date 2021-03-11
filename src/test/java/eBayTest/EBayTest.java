@@ -1,5 +1,7 @@
 package eBayTest;
 
+import java.util.List;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -78,7 +80,6 @@ public class EBayTest extends AbstractTest {
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         
-        // Scroll to daily deals section
         homePage.scrollToDailyDealsSection();
         
         // Open first product from daily deals
@@ -88,7 +89,7 @@ public class EBayTest extends AbstractTest {
         // Verify amount of product in cart
         Assert.assertTrue(cartPage.getQuantity()==1, "Amount of product in cart: 0");
         // On Cart click remove button
-        cartPage.removeBtn.click();
+        cartPage.clickRemoveBtn();
         // Verify successful remove
         String expectedText = "You don't have any items in your cart.";
         Assert.assertTrue(expectedText.equals(cartPage.getStatus()), "Cart is not empty");
@@ -107,8 +108,9 @@ public class EBayTest extends AbstractTest {
         final String search = "iPhone";
         SearchRes searchResPage = homePage.search(search);
         // Verify search result
-        Assert.assertTrue(searchResPage.searchRes.size()>0, "Search result is fail");
-        for (SearchResItem item : searchResPage.searchRes) {
+        List<SearchResItem> searchRes = searchResPage.getSearchRes();
+        Assert.assertTrue(searchRes.size()>0, "Search result is fail");
+        for (SearchResItem item : searchRes) {
         	Assert.assertTrue(item.getTittle().toLowerCase().contains(search.toLowerCase()), "Search result is not as required");
         }
     }
@@ -126,18 +128,20 @@ public class EBayTest extends AbstractTest {
         final String search = "iPhone";
         SearchRes searchResPage = homePage.search(search);
         // Verify search result
-        Assert.assertTrue(searchResPage.searchRes.size()>0, "Search result is fail");
-        for (SearchResItem item : searchResPage.searchRes) {
+        List<SearchResItem> searchRes = searchResPage.getSearchRes(); 
+        Assert.assertTrue(searchRes.size()>0, "Search result is fail");
+        for (SearchResItem item : searchRes) {
         	Assert.assertTrue(item.getTittle().toLowerCase().contains(search.toLowerCase()), "Search result is not as required");
         }
         
         // Verify auction filter
         SearchRes searchResByAuction = searchResPage.clickAuctionButton();
-        Assert.assertTrue(searchResByAuction.searchRes.size()>0, "Search result is fail");
+        List<SearchResItem> searchResFilterdByAuction = searchResByAuction.getSearchRes();
+        Assert.assertTrue(searchResFilterdByAuction.size()>0, "Search result is fail");
         
         // Check is item on auction
-        ItemPage pageOfFirstAuctionElement = searchResByAuction.searchRes.get(0).clickElement();
-        Assert.assertTrue(pageOfFirstAuctionElement.bidBtn.isClickable(), "Bid button is unclickable");
+        ItemPage pageOfFirstAuctionElement = searchResFilterdByAuction.get(0).clickElement();
+        Assert.assertTrue(pageOfFirstAuctionElement.getBidBtn().isClickable(), "Bid button is unclickable");
     }
 	
     
@@ -153,16 +157,18 @@ public class EBayTest extends AbstractTest {
         final String search = "iPhone";
         SearchRes searchResPage = homePage.search(search);
         // Verify search result
-        Assert.assertTrue(searchResPage.searchRes.size()>0, "Search result is fail");
-        for (SearchResItem item : searchResPage.searchRes) {
+        List<SearchResItem> aaa =searchResPage.getSearchRes();
+        Assert.assertTrue(aaa.size()>0, "Search result is fail");
+        for (SearchResItem item : aaa) {
         	Assert.assertTrue(item.getTittle().toLowerCase().contains(search.toLowerCase()), "Search result is not as required");
         }
         
         SearchRes searchResByPrice = searchResPage.clickPrice120();
         // Verify filter result
-        Assert.assertTrue(searchResByPrice.searchRes.size()>0, "Filter by price fail");
-        for (SearchResItem item : searchResByPrice.searchRes) {
-        	Assert.assertTrue(item.getPrice()<= 120.00, "MSG");
+        List<SearchResItem> bbb = searchResByPrice.getSearchRes();
+        Assert.assertTrue(bbb.size()>0, "Filter by price fail");
+        for (SearchResItem item : bbb) {
+        	Assert.assertTrue(item.getPrice()<= 120.00, item.getTittle() + " has price> 120.00 " + item.getPrice());
         }
     }
     
