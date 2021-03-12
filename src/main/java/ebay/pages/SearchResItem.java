@@ -18,16 +18,6 @@ public class SearchResItem extends AbstractUIObject {
     
     @FindBy(xpath = ".//span[@class='s-item__price']")
     private ExtendedWebElement priceElement;
-
-    @FindBy(xpath = "//a[@id='isCartBtn_btn']")
-    private ExtendedWebElement addToCartBtn;
-    
-    @FindBy(xpath = "//select[@id='msku-sel-1']")
-    private ExtendedWebElement optionSelect;
-    
-    @FindBy(xpath = "//select[@id='msku-sel-1']/option[@id='msku-opt-0']")
-    private ExtendedWebElement selectFirstOption;
-    
  
 
     public SearchResItem(WebDriver driver, SearchContext searchContext) {
@@ -49,22 +39,9 @@ public class SearchResItem extends AbstractUIObject {
     	return res;
     }
     
-    public ItemPage clickElement() {
+    public ProductPage clickElement() {
     	tittleElement.click();
-    	return new ItemPage(driver);
-    }
-    
-    public CartPage clickAddToCartBtn() {
-    	if (optionSelect.isClickable()) {
-    		optionSelect.click();
-    		selectFirstOption.click();
-    		addToCartBtn.click();
-    		LOGGER.info("Select option and click add to cart button.");
-    	}
-    	else {
-    		addToCartBtn.click();
-    	}
-    	return new CartPage(driver);
+    	return new ProductPage(driver);
     }
     
 }

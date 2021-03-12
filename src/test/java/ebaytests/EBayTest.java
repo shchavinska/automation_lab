@@ -9,9 +9,9 @@ import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 
 import ebay.pages.CartPage;
-import ebay.pages.HomePageEBay;
-import ebay.pages.ItemPage;
-import ebay.pages.SearchRes;
+import ebay.pages.HomePage;
+import ebay.pages.ProductPage;
+import ebay.pages.SearchResultPage;
 import ebay.pages.SearchResItem;
 
 public class EBayTest extends AbstractTest {
@@ -20,7 +20,7 @@ public class EBayTest extends AbstractTest {
     @MethodOwner(owner = "ashchavinska")
     public void addToCart() {
     	// Open eBay home page and verify page is opened
-        HomePageEBay homePage = new HomePageEBay(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         
@@ -28,7 +28,7 @@ public class EBayTest extends AbstractTest {
         homePage.scrollToDailyDealsSection();
         
         // Open first product from daily deals
-        SearchResItem productPage = homePage.openDailyDealsByNumber(0); 
+        ProductPage productPage = homePage.openDailyDealsByNumber(0); 
         // Click "add to card" (if selection necessary click first element)
         CartPage cartPage = productPage.clickAddToCartBtn();
         // Verify amount of product in cart
@@ -39,7 +39,7 @@ public class EBayTest extends AbstractTest {
     @MethodOwner(owner = "ashchavinska")
     public void addToCartThreeProduct() {
     	// Open eBay home page and verify page is opened
-        HomePageEBay homePage = new HomePageEBay(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         
@@ -47,7 +47,7 @@ public class EBayTest extends AbstractTest {
         homePage.scrollToDailyDealsSection();
         
         // Open first product from daily deals
-        SearchResItem productPage = homePage.openDailyDealsByNumber(0); 
+        ProductPage productPage = homePage.openDailyDealsByNumber(0); 
         // Click "add to card" (if selection necessary click first element)
         CartPage cartPage = productPage.clickAddToCartBtn();
         // Verify amount of product in cart
@@ -76,14 +76,14 @@ public class EBayTest extends AbstractTest {
     @MethodOwner(owner = "ashchavinska")
     public void removeFromCart() {
     	// Open eBay home page and verify page is opened
-        HomePageEBay homePage = new HomePageEBay(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         
         homePage.scrollToDailyDealsSection();
         
         // Open first product from daily deals
-        SearchResItem productPage = homePage.openDailyDealsByNumber(0); 
+        ProductPage productPage = homePage.openDailyDealsByNumber(0); 
         // Click "add to card" (if selection necessary click first element)
         CartPage cartPage = productPage.clickAddToCartBtn();
         // Verify amount of product in cart
@@ -100,13 +100,13 @@ public class EBayTest extends AbstractTest {
     @MethodOwner(owner = "ashchavinska")
     public void checkSearch() {
     	// Open eBay home page and verify page is opened
-        HomePageEBay homePage = new HomePageEBay(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         
         // Search item on eBay
         final String search = "iPhone";
-        SearchRes searchResPage = homePage.search(search);
+        SearchResultPage searchResPage = homePage.search(search);
         // Verify search result
         List<SearchResItem> searchRes = searchResPage.getSearchRes();
         Assert.assertTrue(searchRes.size()>0, "Search result is fail");
@@ -120,13 +120,13 @@ public class EBayTest extends AbstractTest {
     @MethodOwner(owner = "ashchavinska")
     public void checkAuctionFilter() {
     	// Open eBay home page and verify page is opened
-        HomePageEBay homePage = new HomePageEBay(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         
         // Search item on eBay
         final String search = "iPhone";
-        SearchRes searchResPage = homePage.search(search);
+        SearchResultPage searchResPage = homePage.search(search);
         // Verify search result
         List<SearchResItem> searchRes = searchResPage.getSearchRes(); 
         Assert.assertTrue(searchRes.size()>0, "Search result is fail");
@@ -135,12 +135,12 @@ public class EBayTest extends AbstractTest {
         }
         
         // Verify auction filter
-        SearchRes searchResByAuction = searchResPage.clickAuctionButton();
+        SearchResultPage searchResByAuction = searchResPage.clickAuctionButton();
         List<SearchResItem> searchResFilterdByAuction = searchResByAuction.getSearchRes();
         Assert.assertTrue(searchResFilterdByAuction.size()>0, "Search result is fail");
         
         // Check is item on auction
-        ItemPage pageOfFirstAuctionElement = searchResFilterdByAuction.get(0).clickElement();
+        ProductPage pageOfFirstAuctionElement = searchResFilterdByAuction.get(0).clickElement();
         Assert.assertTrue(pageOfFirstAuctionElement.getBidBtn().isClickable(), "Bid button is unclickable");
     }
 	
@@ -149,25 +149,25 @@ public class EBayTest extends AbstractTest {
     @MethodOwner(owner = "ashchavinska")
     public void checkPriceFilter() {
     	// Open eBay home page and verify page is opened
-        HomePageEBay homePage = new HomePageEBay(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         
         // Search item on eBay
         final String search = "iPhone";
-        SearchRes searchResPage = homePage.search(search);
+        SearchResultPage searchResPage = homePage.search(search);
         // Verify search result
-        List<SearchResItem> aaa =searchResPage.getSearchRes();
-        Assert.assertTrue(aaa.size()>0, "Search result is fail");
-        for (SearchResItem item : aaa) {
+        List<SearchResItem> searchRes =searchResPage.getSearchRes();
+        Assert.assertTrue(searchRes.size()>0, "Search result is fail");
+        for (SearchResItem item : searchRes) {
         	Assert.assertTrue(item.getTittle().toLowerCase().contains(search.toLowerCase()), "Search result is not as required");
         }
         
-        SearchRes searchResByPrice = searchResPage.clickPrice120();
+        SearchResultPage searchResByPrice = searchResPage.clickPrice120();
         // Verify filter result
-        List<SearchResItem> bbb = searchResByPrice.getSearchRes();
-        Assert.assertTrue(bbb.size()>0, "Filter by price fail");
-        for (SearchResItem item : bbb) {
+        List<SearchResItem> searchResFilterdByPrice = searchResByPrice.getSearchRes();
+        Assert.assertTrue(searchResFilterdByPrice.size()>0, "Filter by price fail");
+        for (SearchResItem item : searchResFilterdByPrice) {
         	Assert.assertTrue(item.getPrice()<= 120.00, item.getTittle() + " has price> 120.00 " + item.getPrice());
         }
     }
@@ -177,7 +177,7 @@ public class EBayTest extends AbstractTest {
     @MethodOwner(owner = "ashchavinska")
     public void checkCartRtn() {
     	// Open eBay home page and verify page is opened
-        HomePageEBay homePage = new HomePageEBay(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         
@@ -192,7 +192,7 @@ public class EBayTest extends AbstractTest {
     @MethodOwner(owner = "ashchavinska")
     public void checkOptionSelection() {
     	// Open eBay home page and verify page is opened
-        HomePageEBay homePage = new HomePageEBay(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         
@@ -200,7 +200,7 @@ public class EBayTest extends AbstractTest {
         homePage.scrollToDailyDealsSection();
         
         // Open first product from daily deals with selection option
-        SearchResItem productPage = homePage.openDailyDealsByNumber(3); 
+        ProductPage productPage = homePage.openDailyDealsByNumber(3); 
         // Click "add to card" (if selection necessary click first element)
         CartPage cartPage = productPage.clickAddToCartBtn();
         // Verify amount of product in cart

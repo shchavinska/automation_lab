@@ -12,8 +12,8 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.interactions.Actions;
 
-public class SearchRes extends AbstractPage {
-    private static final Logger LOGGER = Logger.getLogger(SearchRes.class);
+public class SearchResultPage extends AbstractPage {
+    private static final Logger LOGGER = Logger.getLogger(SearchResultPage.class);
 
     @FindBy(xpath = "//ul[contains(@class,'srp-results')]/li[contains(@class,'s-item')]")
     private List<SearchResItem> searchRes;
@@ -23,11 +23,11 @@ public class SearchRes extends AbstractPage {
     @FindBy(xpath = "//h2[@class='srp-format-tabs-h2' and contains(text(),'Auction')]")
     private ExtendedWebElement auctionButton;
     
-    public SearchRes(WebDriver driver) {
+    public SearchResultPage(WebDriver driver) {
         super(driver);
     } 
    
-    public SearchRes clickPrice120() {
+    public SearchResultPage clickPrice120() {
     	WebElement element = driver.findElement(By.xpath(checkbox120)); 
     	Actions actions = new Actions(driver); 
     	actions.moveToElement(element);
@@ -35,12 +35,12 @@ public class SearchRes extends AbstractPage {
     	element.click();
     	LOGGER.info("Filter checkbox click.");
  
-        return new SearchRes(driver);
+        return new SearchResultPage(driver);
     }
     
-    public SearchRes clickAuctionButton() {
+    public SearchResultPage clickAuctionButton() {
     	auctionButton.click();
-    	return new SearchRes(driver);
+    	return new SearchResultPage(driver);
     }
     
     public List<SearchResItem> getSearchRes(){

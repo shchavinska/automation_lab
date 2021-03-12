@@ -13,8 +13,8 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractPage;
 
 
-public class HomePageEBay extends AbstractPage {
-    private static final Logger LOGGER = Logger.getLogger(HomePageEBay.class);
+public class HomePage extends AbstractPage {
+    private static final Logger LOGGER = Logger.getLogger(HomePage.class);
     
     @FindBy(xpath="//*[@class='gh-tb ui-autocomplete-input']")
     private ExtendedWebElement searchTextField;
@@ -24,38 +24,34 @@ public class HomePageEBay extends AbstractPage {
 
     @FindBy(xpath="//div[@class='main-content']/div[contains(@class,'hl-standard-carousel')][last()]//li[contains(@class,'carousel')]")
     private List<ExtendedWebElement> listOfDailyDealsItems;
-    
-    
-    private String dailyDealsField = "//div[@class='main-content']/div[contains(@class,'hl-standard-carousel')][last()]//li[contains(@class,'carousel')]";
  
     @FindBy(xpath="//a[contains(@title,'Your shopping cart')]")
     private ExtendedWebElement cartBtn;
     
     
-    public HomePageEBay(WebDriver driver) {
+    public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    public SearchRes search(String q) {
+    public SearchResultPage search(String q) {
         searchTextField.type(q);
         searchButton.click();
         LOGGER.info("Type search query and click Search button.");
-        return new SearchRes(driver);
+        return new SearchResultPage(driver);
     }
     
     
     public void scrollToDailyDealsSection() {
-    	//WebElement element = driver.findElement(By.xpath(dailyDealsField));
     	WebElement element = listOfDailyDealsItems.get(0).getElement();
     	Actions actions = new Actions(driver); 
     	actions.moveToElement(element);
     	LOGGER.info("Scroll to element.");
     }
     
-    public SearchResItem openDailyDealsByNumber(int index) {
+    public ProductPage openDailyDealsByNumber(int index) {
     	listOfDailyDealsItems.get(index).click();
     	LOGGER.info("Item page open.");
-    	return new SearchResItem(driver);
+    	return new ProductPage(driver);
     }
     
     public CartPage clickCartBtn() {
