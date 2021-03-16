@@ -17,18 +17,20 @@ public class SearchResultPage extends AbstractPage {
 
     @FindBy(xpath = "//ul[contains(@class,'srp-results')]/li[contains(@class,'s-item')]")
     private List<SearchResItem> searchRes;
-
-    private String checkbox120 = "//input[@class='checkbox__control' and @aria-label='Under $120.00']";
+    
+    @FindBy(xpath = "//input[@class='checkbox__control' and @aria-label='Under $120.00']")
+    private ExtendedWebElement checkbox120;
     
     @FindBy(xpath = "//h2[@class='srp-format-tabs-h2' and contains(text(),'Auction')]")
     private ExtendedWebElement auctionButton;
+    
     
     public SearchResultPage(WebDriver driver) {
         super(driver);
     } 
    
     public SearchResultPage clickPrice120() {
-    	WebElement element = driver.findElement(By.xpath(checkbox120)); 
+    	WebElement element = checkbox120.getElement(); 
     	Actions actions = new Actions(driver); 
     	actions.moveToElement(element);
     	actions.perform();

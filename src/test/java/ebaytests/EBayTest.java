@@ -28,11 +28,13 @@ public class EBayTest extends AbstractTest {
         homePage.scrollToDailyDealsSection();
         
         // Open first product from daily deals
-        ProductPage productPage = homePage.openDailyDealsByNumber(0); 
+        final int firstPageIndex = 0;
+        ProductPage productPage = homePage.openDailyDealsByNumber(firstPageIndex); 
         // Click "add to card" (if selection necessary click first element)
         CartPage cartPage = productPage.clickAddToCartBtn();
         // Verify amount of product in cart
-        Assert.assertTrue(cartPage.getQuantity()==1, "Amount of product in cart: 0");
+        int expectedAmountItems = 1;
+        Assert.assertEquals(cartPage.getQuantity(), expectedAmountItems, "Amount of product in cart: 0");
     }
     
     @Test(description = "0006")
@@ -47,28 +49,36 @@ public class EBayTest extends AbstractTest {
         homePage.scrollToDailyDealsSection();
         
         // Open first product from daily deals
-        ProductPage productPage = homePage.openDailyDealsByNumber(0); 
+        final int firstPageIndex = 0;
+        ProductPage productPage = homePage.openDailyDealsByNumber(firstPageIndex); 
         // Click "add to card" (if selection necessary click first element)
         CartPage cartPage = productPage.clickAddToCartBtn();
         // Verify amount of product in cart
-        Assert.assertTrue(cartPage.getQuantity()==1, "Amount of product in cart: 0");
+        int expectedAmountItems = 1;
+        Assert.assertEquals(cartPage.getQuantity(), expectedAmountItems, "Amount of product in cart: 0");
         
         // Repeat three times
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         homePage.scrollToDailyDealsSection();
         // Open second product from daily deals
-        homePage.openDailyDealsByNumber(1); 
+        final int secondPageIndex = 1;
+        homePage.openDailyDealsByNumber(secondPageIndex); 
         productPage.clickAddToCartBtn();
-        Assert.assertTrue(cartPage.getQuantity()==2, "Amount of product in cart: <1");
+        // Expected one more item
+        expectedAmountItems += 1;
+        Assert.assertEquals(cartPage.getQuantity(), expectedAmountItems, "Amount of product in cart: != 2");
         
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         homePage.scrollToDailyDealsSection();
         // Open third product from daily deals
-        homePage.openDailyDealsByNumber(2); 
+        final int thirdPageIndex = 2;
+        homePage.openDailyDealsByNumber(thirdPageIndex); 
         productPage.clickAddToCartBtn();
-        Assert.assertTrue(cartPage.getQuantity()==3, "Amount of product in cart: <1");
+        // Expected one more item
+        expectedAmountItems += 1;
+        Assert.assertEquals(cartPage.getQuantity(), expectedAmountItems, "Amount of product in cart: != 3");
     }
     
     
@@ -83,11 +93,12 @@ public class EBayTest extends AbstractTest {
         homePage.scrollToDailyDealsSection();
         
         // Open first product from daily deals
-        ProductPage productPage = homePage.openDailyDealsByNumber(0); 
+        final int firstPageIndex = 0;
+        ProductPage productPage = homePage.openDailyDealsByNumber(firstPageIndex); 
         // Click "add to card" (if selection necessary click first element)
         CartPage cartPage = productPage.clickAddToCartBtn();
         // Verify amount of product in cart
-        Assert.assertTrue(cartPage.getQuantity()==1, "Amount of product in cart: 0");
+        Assert.assertEquals(cartPage.getQuantity(), 1, "Amount of product in cart: 0");
         // On Cart click remove button
         cartPage.clickRemoveBtn();
         // Verify successful remove
@@ -140,7 +151,8 @@ public class EBayTest extends AbstractTest {
         Assert.assertTrue(searchResFilterdByAuction.size()>0, "Search result is fail");
         
         // Check is item on auction
-        ProductPage pageOfFirstAuctionElement = searchResFilterdByAuction.get(0).clickElement();
+        final int firstPageIndex = 0;
+        ProductPage pageOfFirstAuctionElement = searchResFilterdByAuction.get(firstPageIndex).clickElement();
         Assert.assertTrue(pageOfFirstAuctionElement.getBidBtn().isClickable(), "Bid button is unclickable");
     }
 	
@@ -167,15 +179,16 @@ public class EBayTest extends AbstractTest {
         // Verify filter result
         List<SearchResItem> searchResFilterdByPrice = searchResByPrice.getSearchRes();
         Assert.assertTrue(searchResFilterdByPrice.size()>0, "Filter by price fail");
+        double maxPrice = 120.00;
         for (SearchResItem item : searchResFilterdByPrice) {
-        	Assert.assertTrue(item.getPrice()<= 120.00, item.getTittle() + " has price> 120.00 " + item.getPrice());
+        	Assert.assertTrue(item.getPrice()<= maxPrice, item.getTittle() + " has price> 120.00 " + item.getPrice());
         }
     }
     
     
     @Test(description = "0011")
     @MethodOwner(owner = "ashchavinska")
-    public void checkCartRtn() {
+    public void checkCartButton() {
     	// Open eBay home page and verify page is opened
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
@@ -190,7 +203,7 @@ public class EBayTest extends AbstractTest {
     
     @Test(description = "0012")
     @MethodOwner(owner = "ashchavinska")
-    public void checkOptionSelection() {
+    public void checkProductOptionSelection() {
     	// Open eBay home page and verify page is opened
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
@@ -200,11 +213,13 @@ public class EBayTest extends AbstractTest {
         homePage.scrollToDailyDealsSection();
         
         // Open first product from daily deals with selection option
-        ProductPage productPage = homePage.openDailyDealsByNumber(3); 
+        final int pageIndex = 3;
+        ProductPage productPage = homePage.openDailyDealsByNumber(pageIndex); 
         // Click "add to card" (if selection necessary click first element)
         CartPage cartPage = productPage.clickAddToCartBtn();
         // Verify amount of product in cart
-        Assert.assertTrue(cartPage.getQuantity()==1, "Amount of product in cart: 0");
+        int expectedAmountItems = 1;
+        Assert.assertEquals(cartPage.getQuantity(), expectedAmountItems, "Amount of product in cart: 0");
     }
 
 }

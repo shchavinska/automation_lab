@@ -22,6 +22,7 @@ public class ProductPage extends AbstractPage {
     @FindBy(xpath = "//select[@id='msku-sel-1']/option[@id='msku-opt-0']")
     private ExtendedWebElement selectFirstOption;
 	
+    
     public ProductPage(WebDriver driver) {
         super(driver);
     } 

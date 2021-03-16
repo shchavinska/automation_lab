@@ -33,8 +33,8 @@ public class HomePage extends AbstractPage {
         super(driver);
     }
 
-    public SearchResultPage search(String q) {
-        searchTextField.type(q);
+    public SearchResultPage search(String searchValue) {
+        searchTextField.type(searchValue);
         searchButton.click();
         LOGGER.info("Type search query and click Search button.");
         return new SearchResultPage(driver);

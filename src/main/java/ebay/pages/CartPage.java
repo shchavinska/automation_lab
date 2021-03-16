@@ -20,6 +20,7 @@ public class CartPage extends AbstractPage{
 	@FindBy(xpath = "//div[@class='font-title-3']/span/span/span")
 	private ExtendedWebElement cartStatus;
 	
+	
     public CartPage(WebDriver driver) {
         super(driver);
     } 
