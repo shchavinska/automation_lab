@@ -98,7 +98,7 @@ public class ActionWithCart extends AbstractTest{
         cartPage.clickRemoveBtn();
         // Verify successful remove
         String expectedText = "You don't have any items in your cart.";
-        Assert.assertTrue(expectedText.equals(cartPage.getStatus()), "Cart is not empty");
+        Assert.assertEquals(expectedText, cartPage.getStatus(), "Cart is not empty");
     }
     
     @Test(description = "0011")
@@ -112,7 +112,7 @@ public class ActionWithCart extends AbstractTest{
         // Open cart page
         CartPage cartPage = homePage.clickCartBtn();
         String expectedText = "You don't have any items in your cart.";
-        Assert.assertTrue(expectedText.equals(cartPage.getStatus()), "Cart is not empty");
+        Assert.assertEquals(expectedText, cartPage.getStatus(), "Cart is not empty");
     }
 
 }
