@@ -1,0 +1,44 @@
+{
+    "coord": {
+        "lon": "skip",
+        "lat": "skip"
+    },
+    "weather": [
+        {
+            "id": "skip",
+            "main": "skip",
+            "description": "skip",
+            "icon": "skip"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": "skip",
+        "feels_like": "skip",
+        "temp_min": "skip",
+        "temp_max": "skip",
+        "pressure": "skip",
+        "humidity": "skip"
+    },
+    "visibility": "skip",
+    "wind": {
+        "speed": "skip",
+        "deg": "skip",
+        "gust":"skip"
+    },
+    "clouds": {
+        "all": "skip"
+    },
+    "dt": "skip",
+    "sys": {
+        "type": "skip",
+        "id": "skip",
+        "country": "${country}",
+        "sunrise": "skip",
+        "sunset": "skip"
+    },
+    "timezone": "skip",
+    "id": "skip",
+    "name": "skip",
+    "cod": 200
+}
